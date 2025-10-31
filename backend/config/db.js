@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 
 export const connectDB = async () => {
+  console.log("MONGO_URI:", process.env.MONGO_URI); // Log the MONGO_URI for debugging
   await mongoose
-    .connect(
-      "mongodb+srv://Lohit123:Lohit123@cluster0.cb0pa.mongodb.net/mernfullstack"
-    )
-    .then(() => console.log("DB Connected"));
+    .connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log("Database Connected"))
+    .catch((err) => console.error("Database Connection Failed: ", err.message));
 };
