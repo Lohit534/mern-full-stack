@@ -1,9 +1,11 @@
 .portal {
-    min-height: 80vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f8f9fa;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../assets/portal_background.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .portal-container {
