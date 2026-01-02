@@ -23,26 +23,18 @@ const App = () => {
   return (
     <div className='app'>
       <ToastContainer />
-      <Routes>
-        <Route path="/login" element={<Login setToken={setToken} url={url} />} />
-        <Route path="/*" element={
-          !token ? <Navigate to="/login" /> : (
-            <>
-              <Navbar setToken={setToken} />
-              <hr />
-              <div className="app-content">
-                <Sidebar />
-                <Routes>
-                  <Route path="/add" element={<Add url={url} token={token} />} />
-                  <Route path="/list" element={<List url={url} token={token} />} />
-                  <Route path="/orders" element={<Orders url={url} token={token} />} />
-                  <Route path="*" element={<Navigate to="/add" />} />
-                </Routes>
-              </div>
-            </>
-          )
-        } />
-      </Routes>
+      <Navbar setToken={setToken} />
+      <hr />
+      <div className="app-content">
+        <Sidebar />
+        <Routes>
+          <Route path="/add" element={token ? <Add url={url} token={token} /> : <Login setToken={setToken} url={url} />} />
+          <Route path="/list" element={token ? <List url={url} token={token} /> : <Login setToken={setToken} url={url} />} />
+          <Route path="/orders" element={token ? <Orders url={url} token={token} /> : <Login setToken={setToken} url={url} />} />
+          <Route path="/login" element={<Login setToken={setToken} url={url} />} />
+          <Route path="*" element={token ? <Navigate to="/add" /> : <Login setToken={setToken} url={url} />} />
+        </Routes>
+      </div>
     </div>
   )
 }

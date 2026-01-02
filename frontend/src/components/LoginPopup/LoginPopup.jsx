@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 const LoginPopup = ({ setShowLogin }) => {
 
-    const { setToken, url,loadCartData } = useContext(StoreContext)
+    const { setToken, url, loadCartData } = useContext(StoreContext)
     const [currState, setCurrState] = useState("Sign Up");
 
     const [data, setData] = useState({
@@ -32,15 +32,20 @@ const LoginPopup = ({ setShowLogin }) => {
         else {
             new_url += "/api/user/register"
         }
-        const response = await axios.post(new_url, data);
-        if (response.data.success) {
-            setToken(response.data.token)
-            localStorage.setItem("token", response.data.token)
-            loadCartData({token:response.data.token})
-            setShowLogin(false)
-        }
-        else {
-            toast.error(response.data.message)
+        try {
+            const response = await axios.post(new_url, data);
+            if (response.data.success) {
+                setToken(response.data.token)
+                localStorage.setItem("token", response.data.token)
+                loadCartData({ token: response.data.token })
+                setShowLogin(false)
+            }
+            else {
+                toast.error(response.data.message)
+            }
+        } catch (error) {
+            toast.error("Network Error. Please check your connection.")
+            console.error(error)
         }
     }
 
@@ -57,7 +62,7 @@ const LoginPopup = ({ setShowLogin }) => {
                 </div>
                 <button>{currState === "Login" ? "Login" : "Create account"}</button>
                 <div className="login-popup-condition">
-                    <input type="checkbox" name="" id="" required/>
+                    <input type="checkbox" name="" id="" required />
                     <p>By continuing, i agree to the terms of use & privacy policy.</p>
                 </div>
                 {currState === "Login"

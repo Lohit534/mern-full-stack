@@ -1,8 +1,10 @@
 .login {
-    display: grid;
-    height: 100vh;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
     background-color: #f8f9fa;
+    width: 100%;
 }
 
 .login-container {
