@@ -26,7 +26,6 @@ const Footer = () => {
             <li>About us</li>
             <li>Delivery</li>
             <li>Privacy policy</li>
-            <li onClick={() => window.open('https://foodie-del-admin.onrender.com/', '_blank')}>Admin Panel</li>
           </ul>
         </div>
         <div className="footer-content-right">
