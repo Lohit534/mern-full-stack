@@ -38,7 +38,7 @@ const Footer = () => {
       </div>
       <hr />
       <p className="footer-copyright">
-        Copyright 2024 © Foodie.com - All Right Reserved.
+        Copyright {new Date().getFullYear()} © Foodie.com - All Right Reserved.
       </p>
     </div>
   );
