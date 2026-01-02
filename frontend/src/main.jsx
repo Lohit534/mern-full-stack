@@ -5,10 +5,14 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import StoreContextProvider from './Context/StoreContext'
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <StoreContextProvider>
-      <App />
+      <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+        <App />
+      </GoogleOAuthProvider>
     </StoreContextProvider>
   </BrowserRouter>,
 )

@@ -49,6 +49,26 @@
     transition: all 0.3s ease;
 }
 
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: white;
+}
+
 .login-inputs input:focus {
     border-color: black;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -98,4 +118,10 @@
 .login-container p span:hover {
     color: #ff3e24;
     text-decoration: underline;
+}
+
+.google-login-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
