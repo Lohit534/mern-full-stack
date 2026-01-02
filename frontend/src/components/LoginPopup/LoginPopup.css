@@ -99,3 +99,23 @@
     justify-content: center;
     margin-top: 10px;
 }
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 15px 0;
+    color: #808080;
+    font-size: 13px;
+}
+
+.login-divider::before,
+.login-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #C9C9C9;
+}
+
+.login-divider span {
+    padding: 0 10px;
+}

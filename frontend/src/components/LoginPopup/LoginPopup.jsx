@@ -78,6 +78,9 @@ const LoginPopup = ({ setShowLogin }) => {
                     </div>
                 </div>
                 <button>{currState === "Login" ? "Login" : "Create account"}</button>
+                <div className="login-divider">
+                    <span>or continue with</span>
+                </div>
                 <div className="login-popup-condition">
                     <input type="checkbox" name="" id="" required />
                     <p>By continuing, i agree to the terms of use & privacy policy.</p>

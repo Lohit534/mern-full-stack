@@ -71,6 +71,9 @@ const Login = ({ setToken, url }) => {
                     </div>
                 </div>
                 <button type='submit'>{currState === "Sign Up" ? "Create account" : "Login"}</button>
+                <div className="login-divider">
+                    <span>or continue with</span>
+                </div>
                 <div className="login-condition">
                     <input type="checkbox" required />
                     <p>By continuing, i agree to the terms of use & privacy policy.</p>
