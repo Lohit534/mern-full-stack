@@ -9,6 +9,8 @@ const StoreContextProvider = (props) => {
     const [food_list, setFoodList] = useState([]);
     const [cartItems, setCartItems] = useState({});
     const [token, setToken] = useState("")
+    const [search, setSearch] = useState("")
+    const [showSearch, setShowSearch] = useState(false)
     const currency = "₹";
     const deliveryCharge = 50;
 
@@ -35,21 +37,29 @@ const StoreContextProvider = (props) => {
         let totalAmount = 0;
         for (const item in cartItems) {
             try {
-              if (cartItems[item] > 0) {
-                let itemInfo = food_list.find((product) => product._id === item);
-                totalAmount += itemInfo.price * cartItems[item];
-            }  
+                if (cartItems[item] > 0) {
+                    let itemInfo = food_list.find((product) => product._id === item);
+                    totalAmount += itemInfo.price * cartItems[item];
+                }
             } catch (error) {
-                
+
             }
-            
+
         }
         return totalAmount;
     }
 
     const fetchFoodList = async () => {
-        const response = await axios.get(url + "/api/food/list");
-        setFoodList(response.data.data)
+        try {
+            const response = await axios.get(url + "/api/food/list");
+            if (response.data.success) {
+                setFoodList(response.data.data)
+            } else {
+                console.error("Error fetching food list:", response.data.message);
+            }
+        } catch (error) {
+            console.error("Error connecting to backend:", error);
+        }
     }
 
     const loadCartData = async (token) => {
@@ -81,7 +91,11 @@ const StoreContextProvider = (props) => {
         loadCartData,
         setCartItems,
         currency,
-        deliveryCharge
+        deliveryCharge,
+        search,
+        setSearch,
+        showSearch,
+        setShowSearch
     };
 
     return (

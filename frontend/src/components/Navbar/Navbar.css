@@ -19,7 +19,8 @@
 
 .navbar-menu .active {
     padding-bottom: 2px;
-    border-bottom: 2px solid #49557E;
+    border-bottom: 2px solid #FF4C24;
+    color: #FF4C24;
 }
 
 .navbar-right {
@@ -28,11 +29,11 @@
     gap: 40px;
 }
 
-.navbar-search-icon{
-position: relative;
+.navbar-search-icon {
+    position: relative;
 }
 
-.navbar-search-icon .dot{
+.navbar-search-icon .dot {
     position: absolute;
     min-width: 10px;
     min-height: 10px;
@@ -57,29 +58,67 @@ position: relative;
     background: #fff4f2;
 }
 
-.navbar-profile{
+.navbar-search-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.navbar-search-bar {
+    position: absolute;
+    right: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    padding: 8px 15px;
+    border: 1px solid #FF4C24;
+    border-radius: 50px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+    z-index: 10;
+}
+
+.navbar-search-bar input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    width: 150px;
+}
+
+.navbar-search-bar img {
+    width: 12px;
+}
+
+.navbar-profile {
     position: relative;
 
 }
-.navbar-profile-dropdown{
+
+.navbar-profile-dropdown {
     position: absolute;
     display: none;
     right: 0;
     z-index: 1;
 }
-.navbar-profile-dropdown li{
+
+.navbar-profile-dropdown li {
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
 }
-.navbar-profile-dropdown img{
+
+.navbar-profile-dropdown img {
     width: 20px;
 }
-.navbar-profile-dropdown li:hover{
+
+.navbar-profile-dropdown li:hover {
     color: #FF4C24;
 }
-.navbar-profile:hover .navbar-profile-dropdown{
+
+.navbar-profile:hover .navbar-profile-dropdown {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -89,12 +128,15 @@ position: relative;
     border: 1px solid tomato;
     outline: 2px solid white;
     list-style: none;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
-.navbar-profile hr{
+
+.navbar-profile hr {
     background-color: gray;
     height: 1px;
     border: none;
 }
+
 @media (max-width:1050px) {
     .navbar .logo {
         width: 140px;

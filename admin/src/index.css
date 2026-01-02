@@ -1,31 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-*{
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: Outfit;
 }
-body{
+
+body {
   min-height: 100vh;
   background-color: #FCFCFC;
 }
-a{
+
+a {
   text-decoration: none;
   color: inherit;
 }
-hr{
+
+hr {
   border: none;
   height: 1px;
   background-color: #A9A9A9;
 }
-.app-content{
+
+.app-content {
   display: flex;
 }
-.flex-col{
+
+.flex-col {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.cursor{
+
+.cursor {
   cursor: pointer;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+input,
+textarea,
+select {
+  outline-color: tomato;
 }
