@@ -4,16 +4,18 @@ import order_icon from './order_icon.png'
 import profile_image from './profile_image.png'
 import upload_area from './upload_area.png'
 import parcel_icon from './parcel_icon.png'
+import cross_icon from './cross_icon.png'
 
 export const url = 'https://foodie-del-backend.onrender.com'
 export const currency = '₹'
 
-export const assets ={
+export const assets = {
     logo,
     add_icon,
     order_icon,
     profile_image,
     upload_area,
-    parcel_icon
+    parcel_icon,
+    cross_icon
 }
 

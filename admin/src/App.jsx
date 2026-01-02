@@ -23,7 +23,7 @@ const App = () => {
   return (
     <div className='app'>
       <ToastContainer />
-      <Navbar setToken={setToken} />
+      <Navbar setToken={setToken} token={token} />
       <hr />
       <div className="app-content">
         <Sidebar />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './Login.css'
+import { assets } from '../../assets/assets'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -45,6 +46,7 @@ const Login = ({ setToken, url }) => {
             <form onSubmit={onLogin} className="login-container">
                 <div className="login-title">
                     <h2>{currState}</h2>
+                    <img onClick={() => window.location.href = 'https://foodie-del-frontend.onrender.com/'} src={assets.cross_icon} alt="" style={{ cursor: 'pointer' }} />
                 </div>
                 <div className="login-inputs">
                     {currState === "Login" ? <></> : <input name='name' onChange={onChangeHandler} value={data.name} type="text" placeholder='Your name' required />}
