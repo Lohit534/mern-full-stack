@@ -2,13 +2,16 @@ import React from 'react'
 import './Portal.css'
 import { assets } from '../../assets/assets'
 
+import { useNavigate } from 'react-router-dom'
+
 const Portal = () => {
+    const navigate = useNavigate();
     return (
         <div className='portal'>
             <div className="portal-container">
                 <h1>Select Your Role</h1>
                 <div className="portal-options">
-                    <div className="portal-card" onClick={() => window.location.href = '/home'}>
+                    <div className="portal-card" onClick={() => navigate('/home')}>
                         <img src={assets.logo} alt="User" />
                         <h2>User</h2>
                         <p>Order delicious food</p>
