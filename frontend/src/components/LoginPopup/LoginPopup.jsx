@@ -84,6 +84,7 @@ const LoginPopup = ({ setShowLogin }) => {
                 </div>
                 <div className="google-login-wrapper">
                     <GoogleLogin
+                        text={currState === "Login" ? "signin_with" : "signup_with"}
                         onSuccess={credentialResponse => {
                             console.log(credentialResponse);
                             toast.success("Google Login Successful (Client Side)");
