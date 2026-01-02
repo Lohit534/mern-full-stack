@@ -10,27 +10,28 @@
 .login-container {
     place-self: center;
     width: max(23vw, 330px);
-    color: #808080;
+    color: #4a4a4a;
     background-color: white;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    padding: 25px 30px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 12px;
     font-size: 14px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
 }
 
 .login-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: black;
+    color: #2d2d2d;
 }
 
 .login-title h2 {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 26px;
+    font-weight: 700;
 }
 
 .login-inputs {
@@ -42,18 +43,36 @@
 .login-inputs input {
     outline: none;
     border: 1px solid #c9c9c9;
-    padding: 10px;
-    border-radius: 4px;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.login-inputs input:focus {
+    border-color: black;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .login-container button {
     border: none;
-    padding: 10px;
-    border-radius: 4px;
+    padding: 12px;
+    border-radius: 6px;
     color: white;
     background-color: tomato;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.login-container button:hover {
+    background-color: #ff523b;
+    transform: translateY(-1px);
+}
+
+.login-container button:active {
+    transform: translateY(1px);
 }
 
 .login-condition {
@@ -65,10 +84,18 @@
 
 .login-condition input {
     margin-top: 5px;
+    accent-color: tomato;
+    cursor: pointer;
 }
 
 .login-container p span {
     color: tomato;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
+    transition: color 0.2s;
+}
+
+.login-container p span:hover {
+    color: #ff3e24;
+    text-decoration: underline;
 }
