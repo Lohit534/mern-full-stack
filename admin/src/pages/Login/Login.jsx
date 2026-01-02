@@ -74,10 +74,6 @@ const Login = ({ setToken, url }) => {
                 <div className="login-divider">
                     <span>or continue with</span>
                 </div>
-                <div className="login-condition">
-                    <input type="checkbox" required />
-                    <p>By continuing, i agree to the terms of use & privacy policy.</p>
-                </div>
                 <div className="google-login-wrapper">
                     <GoogleLogin
                         text={currState === "Login" ? "signin_with" : "signup_with"}
@@ -90,6 +86,10 @@ const Login = ({ setToken, url }) => {
                             toast.error("Google Login Failed");
                         }}
                     />
+                </div>
+                <div className="login-condition">
+                    <input type="checkbox" required />
+                    <p>By continuing, i agree to the terms of use & privacy policy.</p>
                 </div>
                 {currState === "Login"
                     ? <p>Create a new account? <span onClick={() => setCurrState("Sign Up")}>Click here</span></p>

@@ -81,10 +81,6 @@ const LoginPopup = ({ setShowLogin }) => {
                 <div className="login-divider">
                     <span>or continue with</span>
                 </div>
-                <div className="login-popup-condition">
-                    <input type="checkbox" name="" id="" required />
-                    <p>By continuing, i agree to the terms of use & privacy policy.</p>
-                </div>
                 <div className="google-login-wrapper">
                     <GoogleLogin
                         text={currState === "Login" ? "signin_with" : "signup_with"}
@@ -97,6 +93,10 @@ const LoginPopup = ({ setShowLogin }) => {
                             toast.error("Google Login Failed");
                         }}
                     />
+                </div>
+                <div className="login-popup-condition">
+                    <input type="checkbox" name="" id="" required />
+                    <p>By continuing, i agree to the terms of use & privacy policy.</p>
                 </div>
                 {currState === "Login"
                     ? <p>Create a new account? <span onClick={() => setCurrState('Sign Up')}>Click here</span></p>
