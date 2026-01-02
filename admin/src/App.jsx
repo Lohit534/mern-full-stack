@@ -26,7 +26,7 @@ const App = () => {
       <Navbar setToken={setToken} token={token} />
       <hr />
       <div className="app-content">
-        <Sidebar />
+        {token ? <Sidebar /> : <></>}
         <Routes>
           <Route path="/add" element={token ? <Add url={url} token={token} /> : <Login setToken={setToken} url={url} />} />
           <Route path="/list" element={token ? <List url={url} token={token} /> : <Login setToken={setToken} url={url} />} />
