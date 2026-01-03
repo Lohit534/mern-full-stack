@@ -188,4 +188,37 @@
     .navbar-menu {
         display: none;
     }
+
+    .navbar .logo {
+        width: 100px;
+    }
+
+    .navbar-right {
+        gap: 15px;
+    }
+
+    .navbar-right img {
+        width: 18px;
+    }
+
+    .navbar-right button {
+        font-size: 14px;
+        padding: 6px 15px;
+    }
+
+    /* Search bar mobile responsiveness */
+    .navbar-search-bar {
+        position: fixed;
+        top: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+        width: calc(100% - 40px);
+        max-width: 400px;
+    }
+
+    .navbar-search-bar input {
+        width: 100%;
+        font-size: 14px;
+    }
 }
