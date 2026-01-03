@@ -77,9 +77,23 @@ const Login = ({ setToken, url }) => {
                 <div className="google-login-wrapper">
                     <GoogleLogin
                         text={currState === "Login" ? "signin_with" : "signup_with"}
-                        onSuccess={credentialResponse => {
-                            console.log(credentialResponse);
-                            toast.success("Google Login Successful (Client Side)");
+                        onSuccess={async (credentialResponse) => {
+                            try {
+                                const response = await axios.post(`${url}/api/admin/google-login`, {
+                                    credential: credentialResponse.credential
+                                });
+
+                                if (response.data.success) {
+                                    setToken(response.data.token);
+                                    localStorage.setItem("token", response.data.token);
+                                    toast.success(`Welcome Admin ${response.data.admin.name}!`);
+                                } else {
+                                    toast.error(response.data.message);
+                                }
+                            } catch (error) {
+                                console.error('Google admin login error:', error);
+                                toast.error("Google authentication failed. Please try again.");
+                            }
                         }}
                         onError={() => {
                             console.log('Login Failed');

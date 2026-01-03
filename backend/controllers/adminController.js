@@ -2,10 +2,57 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import validator from "validator";
 import adminModel from "../models/adminModel.js";
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET);
 }
+
+// Google OAuth Login for Admin
+const googleLoginAdmin = async (req, res) => {
+    const { credential } = req.body;
+
+    try {
+        // Verify Google token
+        const ticket = await client.verifyIdToken({
+            idToken: credential,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+
+        const payload = ticket.getPayload();
+        const { sub: googleId, email, name } = payload;
+
+        // Check if admin exists
+        let admin = await adminModel.findOne({ email });
+
+        if (admin) {
+            // Admin exists - login
+            if (!admin.googleId) {
+                admin.googleId = googleId;
+                admin.authProvider = 'google';
+                await admin.save();
+            }
+        } else {
+            // Create new admin
+            admin = new adminModel({
+                name,
+                email,
+                googleId,
+                authProvider: 'google',
+                password: undefined,
+            });
+            await admin.save();
+        }
+
+        const token = createToken(admin._id);
+        res.json({ success: true, token, admin: { name: admin.name, email: admin.email } });
+    } catch (error) {
+        console.error('Google admin login error:', error);
+        res.json({ success: false, message: "Google authentication failed" });
+    }
+};
 
 // login admin
 const loginAdmin = async (req, res) => {
@@ -69,4 +116,4 @@ const registerAdmin = async (req, res) => {
     }
 }
 
-export { loginAdmin, registerAdmin };
+export { loginAdmin, registerAdmin, googleLoginAdmin };

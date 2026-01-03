@@ -2,9 +2,57 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import validator from "validator";
 import userModel from "../models/userModel.js";
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
+};
+
+// Google OAuth Login
+const googleLogin = async (req, res) => {
+  const { credential } = req.body;
+
+  try {
+    // Verify Google token
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { sub: googleId, email, name } = payload;
+
+    // Check if user exists
+    let user = await userModel.findOne({ email });
+
+    if (user) {
+      // User exists - login
+      // Update googleId if not set
+      if (!user.googleId) {
+        user.googleId = googleId;
+        user.authProvider = 'google';
+        await user.save();
+      }
+    } else {
+      // Create new user
+      user = new userModel({
+        name,
+        email,
+        googleId,
+        authProvider: 'google',
+        password: undefined, // No password for Google users
+      });
+      await user.save();
+    }
+
+    const token = createToken(user._id);
+    res.json({ success: true, token, user: { name: user.name, email: user.email } });
+  } catch (error) {
+    console.error('Google login error:', error);
+    res.json({ success: false, message: "Google authentication failed" });
+  }
 };
 
 const loginUser = async (req, res) => {
@@ -64,4 +112,4 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { loginUser, registerUser };
+export { loginUser, registerUser, googleLogin };
