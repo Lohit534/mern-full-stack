@@ -8,6 +8,7 @@ import { googleLogout } from '@react-oauth/google'
 const Navbar = ({ setShowLogin, showAuthNotification }) => {
 
   const [menu, setMenu] = useState("home");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { getTotalCartAmount, token, setToken, search, setSearch, showSearch, setShowSearch } = useContext(StoreContext);
   const navigate = useNavigate();
 
@@ -23,11 +24,30 @@ const Navbar = ({ setShowLogin, showAuthNotification }) => {
     <div className='navbar'>
       <Link to='/'><img className='logo' src={assets.logo} alt="" /></Link>
       <ul className="navbar-menu">
-        <Link to="/" onClick={() => setMenu("home")} className={`${menu === "home" ? "active" : ""}`}>home</Link>
-        <a href='#explore-menu' onClick={() => setMenu("menu")} className={`${menu === "menu" ? "active" : ""}`}>menu</a>
-        <a href='#app-download' onClick={() => setMenu("mob-app")} className={`${menu === "mob-app" ? "active" : ""}`}>mobile app</a>
-        <a href='#footer' onClick={() => setMenu("contact")} className={`${menu === "contact" ? "active" : ""}`}>contact us</a>
+        <Link to="/" onClick={() => setMenu("home")} className={`${menu === "home" ? "active" : ""}`}>Home</Link>
+        <a href='#explore-menu' onClick={() => setMenu("menu")} className={`${menu === "menu" ? "active" : ""}`}>Menu</a>
+        <a href='#app-download' onClick={() => setMenu("mob-app")} className={`${menu === "mob-app" ? "active" : ""}`}>Mobile App</a>
+        <a href='#footer' onClick={() => setMenu("contact")} className={`${menu === "contact" ? "active" : ""}`}>Contact Us</a>
       </ul>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu-overlay" onClick={() => setMobileMenuOpen(false)}>
+          <div className="mobile-menu-content" onClick={(e) => e.stopPropagation()}>
+            <div className="mobile-menu-header">
+              <img className='logo' src={assets.logo} alt="" />
+              <img src={assets.cross_icon} onClick={() => setMobileMenuOpen(false)} className="close-icon" alt="" />
+            </div>
+            <ul className="mobile-menu-list">
+              <Link to="/" onClick={() => { setMenu("home"); setMobileMenuOpen(false) }} className={`${menu === "home" ? "active" : ""}`}>Home</Link>
+              <a href='#explore-menu' onClick={() => { setMenu("menu"); setMobileMenuOpen(false) }} className={`${menu === "menu" ? "active" : ""}`}>Menu</a>
+              <a href='#app-download' onClick={() => { setMenu("mob-app"); setMobileMenuOpen(false) }} className={`${menu === "mob-app" ? "active" : ""}`}>Mobile App</a
+              ><a href='#footer' onClick={() => { setMenu("contact"); setMobileMenuOpen(false) }} className={`${menu === "contact" ? "active" : ""}`}>Contact Us</a>
+            </ul>
+          </div>
+        </div>
+      )}
+
       <div className="navbar-right">
         <div className="navbar-search-container">
           <img onClick={() => setShowSearch(prev => !prev)} src={assets.search_icon} alt="" className="cursor" />
@@ -58,6 +78,11 @@ const Navbar = ({ setShowLogin, showAuthNotification }) => {
             </ul>
           </div>
         }
+        <div className="navbar-hamburger" onClick={() => setMobileMenuOpen(true)}>
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </div>
       </div>
     </div>
   )

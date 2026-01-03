@@ -15,6 +15,8 @@
     gap: 20px;
     color: #49557E;
     font-size: 18px;
+    text-transform: capitalize;
+    /* Ensure capitalization */
 }
 
 .navbar-menu .active {
@@ -41,6 +43,10 @@
     border-radius: 5px;
     top: -8px;
     right: -8px;
+}
+
+.navbar-hamburger {
+    display: none;
 }
 
 .navbar-right button {
@@ -220,5 +226,91 @@
     .navbar-search-bar input {
         width: 100%;
         font-size: 14px;
+    }
+
+    /* Mobile Menu Styles */
+    .navbar-hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .navbar-hamburger .bar {
+        width: 25px;
+        height: 3px;
+        background-color: #49557E;
+        border-radius: 2px;
+    }
+
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 100;
+        animation: fadeIn 0.3s;
+    }
+
+    .mobile-menu-content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100%;
+        background-color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        animation: slideInRight 0.3s;
+    }
+
+    .mobile-menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mobile-menu-header .logo {
+        width: 100px;
+    }
+
+    .mobile-menu-header .close-icon {
+        width: 15px;
+        cursor: pointer;
+    }
+
+    .mobile-menu-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        list-style: none;
+        font-size: 18px;
+        color: #49557E;
+    }
+
+    .mobile-menu-list a,
+    .mobile-menu-list .active {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
+
+    .mobile-menu-list .active {
+        color: #FF4C24;
+        font-weight: 500;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
     }
 }
