@@ -3,6 +3,7 @@ import './Navbar.css'
 import { assets } from '../../assets/assets'
 import { Link, useNavigate } from 'react-router-dom'
 import { StoreContext } from '../../Context/StoreContext'
+import { googleLogout } from '@react-oauth/google'
 
 const Navbar = ({ setShowLogin }) => {
 
@@ -13,6 +14,7 @@ const Navbar = ({ setShowLogin }) => {
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
+    googleLogout(); // Clear Google session
     navigate('/')
   }
 

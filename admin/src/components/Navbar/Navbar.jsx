@@ -1,12 +1,14 @@
 import React from 'react'
 import './Navbar.css'
 import { assets } from '../../assets/assets'
+import { googleLogout } from '@react-oauth/google'
 
 const Navbar = ({ setToken, token }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
+    googleLogout(); // Clear Google session
   }
 
   return (
