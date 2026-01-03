@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { StoreContext } from '../../Context/StoreContext'
 import { googleLogout } from '@react-oauth/google'
 
-const Navbar = ({ setShowLogin }) => {
+const Navbar = ({ setShowLogin, showAuthNotification }) => {
 
   const [menu, setMenu] = useState("home");
   const { getTotalCartAmount, token, setToken, search, setSearch, showSearch, setShowSearch } = useContext(StoreContext);
@@ -16,6 +16,7 @@ const Navbar = ({ setShowLogin }) => {
     setToken("");
     googleLogout(); // Clear Google session
     navigate('/')
+    showAuthNotification("Successfully logged out!");
   }
 
   return (

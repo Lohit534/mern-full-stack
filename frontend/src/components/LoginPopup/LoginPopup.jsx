@@ -6,7 +6,7 @@ import { StoreContext } from '../../Context/StoreContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-const LoginPopup = ({ setShowLogin }) => {
+const LoginPopup = ({ setShowLogin, showAuthNotification }) => {
 
     const { setToken, url, loadCartData } = useContext(StoreContext)
     const [currState, setCurrState] = useState("Sign Up");
@@ -41,6 +41,7 @@ const LoginPopup = ({ setShowLogin }) => {
                 localStorage.setItem("token", response.data.token)
                 loadCartData({ token: response.data.token })
                 setShowLogin(false)
+                showAuthNotification(currState === "Login" ? "Successfully logged in!" : "Account created successfully!");
             }
             else {
                 toast.error(response.data.message)
@@ -96,7 +97,7 @@ const LoginPopup = ({ setShowLogin }) => {
                                     localStorage.setItem("token", response.data.token);
                                     loadCartData({ token: response.data.token });
                                     setShowLogin(false);
-                                    toast.success(`Welcome ${response.data.user.name}!`);
+                                    showAuthNotification(`Welcome ${response.data.user.name}!`);
                                 } else {
                                     toast.error(response.data.message);
                                 }
