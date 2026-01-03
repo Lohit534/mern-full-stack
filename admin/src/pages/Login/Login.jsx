@@ -76,6 +76,7 @@ const Login = ({ setToken, url }) => {
                 </div>
                 <div className="google-login-wrapper">
                     <GoogleLogin
+                        useOneTap={false}
                         text={currState === "Login" ? "signin_with" : "signup_with"}
                         onSuccess={async (credentialResponse) => {
                             try {
