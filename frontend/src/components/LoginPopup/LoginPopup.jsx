@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 const LoginPopup = ({ setShowLogin, showAuthNotification }) => {
 
     const { setToken, url, loadCartData } = useContext(StoreContext)
-    const [currState, setCurrState] = useState("Sign Up");
+    const [currState, setCurrState] = useState("Login");
     const [showPassword, setShowPassword] = useState(false);
 
     const [data, setData] = useState({
