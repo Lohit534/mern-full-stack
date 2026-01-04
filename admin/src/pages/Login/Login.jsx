@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import './Login.css'
 import { assets } from '../../assets/assets'
 import axios from 'axios'
@@ -14,6 +14,31 @@ const Login = ({ setToken, url }) => {
         email: "",
         password: ""
     })
+
+    const googleLogin = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            try {
+                const response = await axios.post(`${url}/api/admin/google-login`, {
+                    accessToken: tokenResponse.access_token
+                });
+
+                if (response.data.success) {
+                    setToken(response.data.token);
+                    localStorage.setItem("token", response.data.token);
+                    toast.success(`Welcome Admin ${response.data.admin.name}!`);
+                } else {
+                    toast.error(response.data.message);
+                }
+            } catch (error) {
+                console.error('Google admin login error:', error);
+                toast.error("Google authentication failed. Please try again.");
+            }
+        },
+        onError: () => {
+            console.log('Login Failed');
+            toast.error("Google Login Failed");
+        }
+    });
 
     const onChangeHandler = (event) => {
         const name = event.target.name
@@ -75,32 +100,10 @@ const Login = ({ setToken, url }) => {
                     <span>or continue with</span>
                 </div>
                 <div className="google-login-wrapper">
-                    <GoogleLogin
-                        useOneTap={false}
-                        text={currState === "Login" ? "signin_with" : "signup_with"}
-                        onSuccess={async (credentialResponse) => {
-                            try {
-                                const response = await axios.post(`${url}/api/admin/google-login`, {
-                                    credential: credentialResponse.credential
-                                });
-
-                                if (response.data.success) {
-                                    setToken(response.data.token);
-                                    localStorage.setItem("token", response.data.token);
-                                    toast.success(`Welcome Admin ${response.data.admin.name}!`);
-                                } else {
-                                    toast.error(response.data.message);
-                                }
-                            } catch (error) {
-                                console.error('Google admin login error:', error);
-                                toast.error("Google authentication failed. Please try again.");
-                            }
-                        }}
-                        onError={() => {
-                            console.log('Login Failed');
-                            toast.error("Google Login Failed");
-                        }}
-                    />
+                    <button type="button" className="google-sign-in-button" onClick={() => googleLogin()}>
+                        <img src={assets.google_logo} alt="Google" style={{ width: "20px", marginRight: "10px" }} />
+                        {currState === "Login" ? "Sign in with Google" : "Sign up with Google"}
+                    </button>
                 </div>
                 <div className="login-condition">
                     <input type="checkbox" required />

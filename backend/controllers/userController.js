@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import validator from "validator";
 import userModel from "../models/userModel.js";
 import { OAuth2Client } from 'google-auth-library';
+import axios from 'axios';
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -12,17 +13,34 @@ const createToken = (id) => {
 
 // Google OAuth Login
 const googleLogin = async (req, res) => {
-  const { credential } = req.body;
+  const { credential, accessToken } = req.body;
 
   try {
-    // Verify Google token
-    const ticket = await client.verifyIdToken({
-      idToken: credential,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
+    let email, name, googleId;
 
-    const payload = ticket.getPayload();
-    const { sub: googleId, email, name } = payload;
+    if (accessToken) {
+      // Verify Access Token via Google UserInfo API
+      // Dynamic import axios if not using require/import at top-level to avoid issues, or just import at top.
+      // Since I added axios to package.json, I will import it at the top.
+      const response = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      });
+      email = response.data.email;
+      name = response.data.name;
+      googleId = response.data.sub;
+    } else if (credential) {
+      // Verify Google ID Token (Legacy/Standard)
+      const ticket = await client.verifyIdToken({
+        idToken: credential,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
+      const payload = ticket.getPayload();
+      email = payload.email;
+      name = payload.name;
+      googleId = payload.sub;
+    } else {
+      return res.json({ success: false, message: "No token provided" });
+    }
 
     // Check if user exists
     let user = await userModel.findOne({ email });
