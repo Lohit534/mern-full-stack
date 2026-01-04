@@ -144,6 +144,10 @@
     transition: background-color 0.2s;
 }
 
+.login-popup-container .google-sign-in-button svg {
+    margin-right: 10px;
+}
+
 .login-popup-container .google-sign-in-button:hover {
     background-color: #f8f8f8;
     border-color: #ccc;

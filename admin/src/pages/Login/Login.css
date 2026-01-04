@@ -171,6 +171,10 @@
     margin-top: 20px;
 }
 
+.login-container .google-sign-in-button svg {
+    margin-right: 10px;
+}
+
 .login-container .google-sign-in-button:hover {
     background-color: #f8f8f8;
     border-color: #ccc;
