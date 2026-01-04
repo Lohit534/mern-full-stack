@@ -128,7 +128,7 @@
     padding: 0 10px;
 }
 
-.google-sign-in-button {
+.login-popup-container .google-sign-in-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -144,7 +144,7 @@
     transition: background-color 0.2s;
 }
 
-.google-sign-in-button:hover {
+.login-popup-container .google-sign-in-button:hover {
     background-color: #f8f8f8;
     border-color: #ccc;
 }

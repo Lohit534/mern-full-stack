@@ -154,7 +154,7 @@
     padding: 0 10px;
 }
 
-.google-sign-in-button {
+.login-container .google-sign-in-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,7 +171,7 @@
     margin-top: 20px;
 }
 
-.google-sign-in-button:hover {
+.login-container .google-sign-in-button:hover {
     background-color: #f8f8f8;
     border-color: #ccc;
 }
