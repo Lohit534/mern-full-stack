@@ -9,6 +9,7 @@ const Navbar = ({ setToken, token }) => {
     localStorage.removeItem("token");
     setToken("");
     googleLogout(); // Clear Google session
+    window.location.reload(); // Ensure clean state
   }
 
   return (
