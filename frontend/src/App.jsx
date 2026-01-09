@@ -15,7 +15,7 @@ import AuthNotification from './components/AuthNotification/AuthNotification'
 
 const App = () => {
 
-  const [showLogin, setShowLogin] = useState(true);
+  const [showLogin, setShowLogin] = useState(false);
   const [authNotification, setAuthNotification] = useState(null);
 
   const showAuthNotification = (message, type = 'success') => {
