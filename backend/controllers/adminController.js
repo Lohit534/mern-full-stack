@@ -78,6 +78,11 @@ const loginAdmin = async (req, res) => {
             return res.json({ success: false, message: "Admin does not exist" });
         }
 
+        // Google OAuth admins don't have a password
+        if (!admin.password) {
+            return res.json({ success: false, message: "This account uses Google sign-in. Please use the Google button to log in." });
+        }
+
         const isMatch = await bcrypt.compare(password, admin.password);
 
         if (!isMatch) {

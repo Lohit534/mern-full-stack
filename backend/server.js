@@ -17,6 +17,12 @@ const port = process.env.PORT || 4000;
 app.use(express.json())
 app.use(cors())
 
+// Allow Google OAuth popups (fix Cross-Origin-Opener-Policy errors)
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  next();
+});
+
 // db connection
 connectDB()
 

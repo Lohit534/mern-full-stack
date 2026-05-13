@@ -82,6 +82,11 @@ const loginUser = async (req, res) => {
       return res.json({ success: false, message: "User does not exist" });
     }
 
+    // Google OAuth users don't have a password — guide them to use Google sign-in
+    if (!user.password) {
+      return res.json({ success: false, message: "This account uses Google sign-in. Please use the Google button to log in." });
+    }
+
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
