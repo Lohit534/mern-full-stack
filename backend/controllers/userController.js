@@ -96,7 +96,7 @@ const loginUser = async (req, res) => {
     const token = createToken(user._id);
     res.json({ success: true, token });
   } catch (error) {
-    console.log(error);
+    console.log("loginUser error:", error.message);
     res.json({ success: false, message: "Error" });
   }
 };
@@ -130,7 +130,7 @@ const registerUser = async (req, res) => {
     const token = createToken(user._id);
     res.json({ success: true, token });
   } catch (error) {
-    console.log(error);
+    console.log("registerUser error:", error.message);
     res.json({ success: false, message: "Error" });
   }
 };
