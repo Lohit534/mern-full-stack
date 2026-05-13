@@ -56,15 +56,20 @@ const Login = ({ setToken, url }) => {
             newUrl += "/api/admin/register"
         }
 
-        const response = await axios.post(newUrl, data);
+        try {
+            const response = await axios.post(newUrl, data);
 
-        if (response.data.success) {
-            setToken(response.data.token);
-            localStorage.setItem("token", response.data.token);
-            toast.success("Welcome Admin")
-        }
-        else {
-            toast.error(response.data.message)
+            if (response.data.success) {
+                setToken(response.data.token);
+                localStorage.setItem("token", response.data.token);
+                toast.success("Welcome Admin")
+            }
+            else {
+                toast.error(response.data.message)
+            }
+        } catch (error) {
+            toast.error("Network Error. Please check your connection.");
+            console.error(error);
         }
     }
 

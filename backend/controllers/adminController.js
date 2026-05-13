@@ -92,7 +92,7 @@ const loginAdmin = async (req, res) => {
         const token = createToken(admin._id);
         res.json({ success: true, token });
     } catch (error) {
-        console.log(error);
+        console.log("loginAdmin error:", error.message);
         res.json({ success: false, message: "Error" });
     }
 }
@@ -130,7 +130,7 @@ const registerAdmin = async (req, res) => {
         res.json({ success: true, token });
 
     } catch (error) {
-        console.log(error);
+        console.log("registerAdmin error:", error.message);
         res.json({ success: false, message: "Error" });
     }
 }
